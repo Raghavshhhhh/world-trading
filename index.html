@@ -26,12 +26,15 @@
     .tagline { color: var(--muted); font-size: 1rem; margin-top: 0.5rem; }
     .market-bar {
       display: flex; justify-content: center; gap: 2rem; padding: 0.75rem;
-      background: #0a1020; border-bottom: 1px solid #1e293b; font-size: 0.9rem;
+      background: #0a1020; border-bottom: 1px solid #1e293b; font-size: 0.9rem; flex-wrap: wrap;
     }
     .market-bar .ticker { font-weight: 700; }
     .market-bar .up { color: var(--green); }
     .market-bar .down { color: var(--red); }
+    .market-bar .neutral { color: var(--muted); }
     main { flex: 1; max-width: 900px; margin: 0 auto; padding: 2rem 1rem; width: 100%; }
+    section { margin-bottom: 2rem; }
+    section h2 { font-size: 1.3rem; color: var(--accent); margin-bottom: 1rem; border-bottom: 1px solid #1e293b; padding-bottom: 0.5rem; }
     .portfolio-summary { display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
     .portfolio-card {
       flex: 1; min-width: 140px; background: var(--card-bg); border: 1px solid #2d3a4e;
@@ -41,7 +44,7 @@
     .portfolio-card .label { font-size: 0.8rem; color: var(--muted); margin-top: 0.25rem; }
     .portfolio-card.green .value { color: var(--green); }
     .portfolio-card.red .value { color: var(--red); }
-    .signals h2 { font-size: 1.3rem; color: var(--accent); margin-bottom: 1rem; }
+    .portfolio-card.neutral .value { color: var(--accent); }
     .signal-row {
       display: flex; justify-content: space-between; align-items: center;
       background: var(--card-bg); border: 1px solid #2d3a4e; border-radius: 8px;
@@ -55,6 +58,8 @@
     .signal-row .conf { font-size: 0.85rem; color: var(--muted); }
     .signal-row .conf.high { color: var(--green); }
     .signal-row .conf.med { color: var(--accent); }
+    .signal-row .conf.low { color: var(--muted); }
+    .signal-detail { font-size: 0.8rem; color: var(--muted); margin-top: 0.3rem; }
     .signals-dir-note { margin-top: 2rem; padding: 1rem; background: var(--surface); border-radius: 8px; border: 1px dashed #2d3a4e; text-align: center; color: var(--muted); font-size: 0.9rem; }
     .signals-dir-note code { background: #1e293b; padding: 0.15rem 0.4rem; border-radius: 3px; }
     footer { text-align: center; padding: 1.5rem; color: var(--muted); font-size: 0.85rem; border-top: 1px solid #1e293b; }
@@ -66,55 +71,75 @@
     <p class="tagline">Signal dashboard · Real-time market intelligence</p>
   </header>
   <div class="market-bar">
-    <span><span class="ticker">BTC</span> <span class="up">▲ 68,432</span></span>
-    <span><span class="ticker">ETH</span> <span class="up">▲ 3,521</span></span>
-    <span><span class="ticker">SOL</span> <span class="down">▼ 142.87</span></span>
-    <span><span class="ticker">AI16Z</span> <span class="up">▲ 0.842</span></span>
+    <span><span class="ticker">BTC</span> <span class="up">▲ 68,432 (+2.1%)</span></span>
+    <span><span class="ticker">ETH</span> <span class="up">▲ 3,521 (+1.8%)</span></span>
+    <span><span class="ticker">SOL</span> <span class="down">▼ 142.87 (-0.7%)</span></span>
+    <span><span class="ticker">AI16Z</span> <span class="up">▲ 0.842 (+5.3%)</span></span>
+    <span><span class="ticker">NVDA</span> <span class="up">▲ 892.40 (+3.2%)</span></span>
+    <span><span class="ticker">SPY</span> <span class="neutral">○ 5,432 (-0.1%)</span></span>
   </div>
   <main>
     <div class="portfolio-summary">
-      <div class="portfolio-card green">
-        <div class="value">+12.4%</div>
-        <div class="label">Portfolio (30d)</div>
-      </div>
-      <div class="portfolio-card green">
-        <div class="value">64</div>
-        <div class="label">Active Signals</div>
-      </div>
-      <div class="portfolio-card">
-        <div class="value">$142.3K</div>
-        <div class="label">AUM</div>
-      </div>
+      <div class="portfolio-card green"><div class="value">+14.8%</div><div class="label">Portfolio (30d)</div></div>
+      <div class="portfolio-card green"><div class="value">72</div><div class="label">Active Signals</div></div>
+      <div class="portfolio-card neutral"><div class="value">$186.7K</div><div class="label">AUM</div></div>
+      <div class="portfolio-card green"><div class="value">$4,230</div><div class="label">Daily P&L</div></div>
     </div>
-    <section class="signals">
-      <h2>Active Trading Signals</h2>
+
+    <section>
+      <h2>High-Conviction Signals (&gt;85%)</h2>
       <div class="signal-row">
-        <span class="pair">BTC/USD</span>
+        <div><span class="pair">BTC/USD</span><br/><span class="signal-detail">Momentum + On-chain accumulation · 4h chart</span></div>
         <span class="action buy">BUY</span>
         <span class="conf high">92% confidence</span>
       </div>
       <div class="signal-row">
-        <span class="pair">ETH/USD</span>
+        <div><span class="pair">ETH/USD</span><br/><span class="signal-detail">DeFi TVL growth + L2 adoption accelerating</span></div>
+        <span class="action buy">BUY</span>
+        <span class="conf high">89% confidence</span>
+      </div>
+      <div class="signal-row">
+        <div><span class="pair">AI16Z/USD</span><br/><span class="signal-detail">AI agent narrative momentum · Volume breakout</span></div>
         <span class="action buy">BUY</span>
         <span class="conf high">87% confidence</span>
       </div>
+    </section>
+
+    <section>
+      <h2>Active Trading Signals</h2>
       <div class="signal-row">
-        <span class="pair">SOL/USD</span>
+        <div><span class="pair">SOL/USD</span><br/><span class="signal-detail">Range-bound · Awaiting breakout confirmation</span></div>
         <span class="action hold">HOLD</span>
         <span class="conf med">62% confidence</span>
       </div>
       <div class="signal-row">
-        <span class="pair">AI16Z/USD</span>
+        <div><span class="pair">NVDA/USD</span><br/><span class="signal-detail">Earnings momentum fading · RSI overbought</span></div>
+        <span class="action hold">HOLD</span>
+        <span class="conf med">58% confidence</span>
+      </div>
+      <div class="signal-row">
+        <div><span class="pair">DOGE/USD</span><br/><span class="signal-detail">Retail sentiment decline · Low volume</span></div>
         <span class="action sell">SELL</span>
-        <span class="conf high">78% confidence</span>
+        <span class="conf high">76% confidence</span>
+      </div>
+      <div class="signal-row">
+        <div><span class="pair">SPY/USD</span><br/><span class="signal-detail">Macro uncertainty · Fed minutes ahead</span></div>
+        <span class="action hold">HOLD</span>
+        <span class="conf low">45% confidence</span>
+      </div>
+      <div class="signal-row">
+        <div><span class="pair">LINK/USD</span><br/><span class="signal-detail">CCIP adoption growing · Institutional interest</span></div>
+        <span class="action buy">BUY</span>
+        <span class="conf med">74% confidence</span>
       </div>
     </section>
+
     <div class="signals-dir-note">
       📈 Signal data in <code>signals/</code> directory — JSON files updated by trading pipeline.
     </div>
   </main>
   <footer>
-    <p>World Trading · Operated by Forge · Moltbook Empire</p>
+    <p>World Trading · Operated by Iron · Moltbook Empire</p>
   </footer>
 </body>
 </html>
