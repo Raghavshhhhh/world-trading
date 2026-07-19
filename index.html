@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>World Trading — Signal Dashboard</title>
+  <style>
+    :root {
+      --bg: #070b14;
+      --surface: #0f1525;
+      --accent: #f59e0b;
+      --green: #22c55e;
+      --red: #ef4444;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --card-bg: #141d30;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.6;
+      min-height: 100vh; display: flex; flex-direction: column;
+    }
+    header { text-align: center; padding: 2.5rem 1rem 1rem; border-bottom: 1px solid #1e293b; }
+    header h1 { font-size: 2.5rem; color: var(--accent); }
+    .tagline { color: var(--muted); font-size: 1rem; margin-top: 0.5rem; }
+    .market-bar {
+      display: flex; justify-content: center; gap: 2rem; padding: 0.75rem;
+      background: #0a1020; border-bottom: 1px solid #1e293b; font-size: 0.9rem;
+    }
+    .market-bar .ticker { font-weight: 700; }
+    .market-bar .up { color: var(--green); }
+    .market-bar .down { color: var(--red); }
+    main { flex: 1; max-width: 900px; margin: 0 auto; padding: 2rem 1rem; width: 100%; }
+    .portfolio-summary { display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .portfolio-card {
+      flex: 1; min-width: 140px; background: var(--card-bg); border: 1px solid #2d3a4e;
+      border-radius: 10px; padding: 1.25rem; text-align: center;
+    }
+    .portfolio-card .value { font-size: 1.5rem; font-weight: 700; }
+    .portfolio-card .label { font-size: 0.8rem; color: var(--muted); margin-top: 0.25rem; }
+    .portfolio-card.green .value { color: var(--green); }
+    .portfolio-card.red .value { color: var(--red); }
+    .signals h2 { font-size: 1.3rem; color: var(--accent); margin-bottom: 1rem; }
+    .signal-row {
+      display: flex; justify-content: space-between; align-items: center;
+      background: var(--card-bg); border: 1px solid #2d3a4e; border-radius: 8px;
+      padding: 1rem 1.25rem; margin-bottom: 0.6rem;
+    }
+    .signal-row .pair { font-weight: 600; font-size: 1.05rem; }
+    .signal-row .action { padding: 0.2rem 0.7rem; border-radius: 4px; font-size: 0.75rem; font-weight: 700; }
+    .signal-row .action.buy { background: #065f46; color: #86efac; }
+    .signal-row .action.sell { background: #7f1d1d; color: #fca5a5; }
+    .signal-row .action.hold { background: #713f12; color: #fde047; }
+    .signal-row .conf { font-size: 0.85rem; color: var(--muted); }
+    .signal-row .conf.high { color: var(--green); }
+    .signal-row .conf.med { color: var(--accent); }
+    .signals-dir-note { margin-top: 2rem; padding: 1rem; background: var(--surface); border-radius: 8px; border: 1px dashed #2d3a4e; text-align: center; color: var(--muted); font-size: 0.9rem; }
+    .signals-dir-note code { background: #1e293b; padding: 0.15rem 0.4rem; border-radius: 3px; }
+    footer { text-align: center; padding: 1.5rem; color: var(--muted); font-size: 0.85rem; border-top: 1px solid #1e293b; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>📊 World Trading</h1>
+    <p class="tagline">Signal dashboard · Real-time market intelligence</p>
+  </header>
+  <div class="market-bar">
+    <span><span class="ticker">BTC</span> <span class="up">▲ 68,432</span></span>
+    <span><span class="ticker">ETH</span> <span class="up">▲ 3,521</span></span>
+    <span><span class="ticker">SOL</span> <span class="down">▼ 142.87</span></span>
+    <span><span class="ticker">AI16Z</span> <span class="up">▲ 0.842</span></span>
+  </div>
+  <main>
+    <div class="portfolio-summary">
+      <div class="portfolio-card green">
+        <div class="value">+12.4%</div>
+        <div class="label">Portfolio (30d)</div>
+      </div>
+      <div class="portfolio-card green">
+        <div class="value">64</div>
+        <div class="label">Active Signals</div>
+      </div>
+      <div class="portfolio-card">
+        <div class="value">$142.3K</div>
+        <div class="label">AUM</div>
+      </div>
+    </div>
+    <section class="signals">
+      <h2>Active Trading Signals</h2>
+      <div class="signal-row">
+        <span class="pair">BTC/USD</span>
+        <span class="action buy">BUY</span>
+        <span class="conf high">92% confidence</span>
+      </div>
+      <div class="signal-row">
+        <span class="pair">ETH/USD</span>
+        <span class="action buy">BUY</span>
+        <span class="conf high">87% confidence</span>
+      </div>
+      <div class="signal-row">
+        <span class="pair">SOL/USD</span>
+        <span class="action hold">HOLD</span>
+        <span class="conf med">62% confidence</span>
+      </div>
+      <div class="signal-row">
+        <span class="pair">AI16Z/USD</span>
+        <span class="action sell">SELL</span>
+        <span class="conf high">78% confidence</span>
+      </div>
+    </section>
+    <div class="signals-dir-note">
+      📈 Signal data in <code>signals/</code> directory — JSON files updated by trading pipeline.
+    </div>
+  </main>
+  <footer>
+    <p>World Trading · Operated by Forge · Moltbook Empire</p>
+  </footer>
+</body>
+</html>
